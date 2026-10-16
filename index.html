@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorkBuddy 使用情况总结 · liangzaijwj2</title>
+  <meta name="description" content="回顾 WorkBuddy 历史任务，汇总产出、时间线、技术栈与使用偏好的可视化报告。" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-dot"></span>
+        <span class="brand-text">WorkBuddy <em>Usage Report</em></span>
+      </a>
+      <nav class="nav">
+        <a href="#overview">总览</a>
+        <a href="#timeline">时间线</a>
+        <a href="#projects">项目</a>
+        <a href="#stack">技术栈</a>
+        <a href="#insights">使用画像</a>
+        <a href="#workspaces">工作区</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-badge">数据取自本地工作区 · 记忆日志 · 变更索引 · 发布记录</div>
+        <h1 class="hero-title">我的 <span class="grad">WorkBuddy</span> 使用情况总结</h1>
+        <p class="hero-sub">
+          三天、两个完整项目、三千余行代码。这份报告把这段时间里交给 WorkBuddy 的每一次任务、
+          每一行产出和背后的使用偏好，全部摊开来看。
+        </p>
+        <div class="hero-meta" id="heroMeta"></div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">看看做了什么 →</a>
+          <a class="btn btn-ghost" href="#insights">我的使用画像</a>
+        </div>
+      </div>
+      <div class="hero-glow"></div>
+    </section>
+
+    <!-- Overview stats -->
+    <section class="section" id="overview">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>总览</h2>
+          <p>核心数据一览，全部来自真实产出的统计</p>
+        </div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section section-alt" id="timeline">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>时间线</h2>
+          <p>从首次启动到现在，每一步都留下了痕迹</p>
+        </div>
+        <ol class="timeline" id="timelineList"></ol>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>项目详情</h2>
+          <p>两个完整交付的项目，以及它们各自的体量</p>
+        </div>
+        <div id="projectList"></div>
+      </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="section section-alt" id="stack">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>技术栈分布</h2>
+          <p>按产出代码行数统计</p>
+        </div>
+        <div class="stack-grid">
+          <div class="card donut-card">
+            <div class="donut-wrap">
+              <svg viewBox="0 0 42 42" class="donut" id="donut" role="img" aria-label="技术栈占比环形图"></svg>
+              <div class="donut-center">
+                <strong id="donutTotal">0</strong>
+                <span>总行数</span>
+              </div>
+            </div>
+            <div class="donut-legend" id="donutLegend"></div>
+          </div>
+          <div class="card bars-card">
+            <h3 class="card-title">按语言拆分</h3>
+            <div id="bars"></div>
+            <p class="bars-note">
+              两个项目都不约而同地选择了<strong>零第三方依赖</strong>：Node 端全用原生 http / fs / path 手写，
+              Python 端只导入标准库。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Insights -->
+    <section class="section" id="insights">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>使用画像</h2>
+          <p>从任务选择和技术取舍中，读出来的偏好</p>
+        </div>
+        <div class="insights" id="insights"></div>
+      </div>
+    </section>
+
+    <!-- Workspaces -->
+    <section class="section section-alt" id="workspaces">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>工作区清单</h2>
+          <p>所有被创建过的工作区及其状态</p>
+        </div>
+        <div class="table-card card">
+          <table class="table">
+            <thead>
+              <tr><th>工作区</th><th>创建时间</th><th>状态</th><th>说明</th></tr>
+            </thead>
+            <tbody id="wsRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <div class="footer-brand">WorkBuddy Usage Report</div>
+        <div class="footer-sub" id="footerMeta"></div>
+      </div>
+      <div class="footer-note">纯静态页面 · 零外部依赖 · 数据完全来自本地记录</div>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
