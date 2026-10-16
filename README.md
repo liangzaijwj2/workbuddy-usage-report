@@ -6,13 +6,16 @@
 
 ## 在线访问
 
-本仓库已开启 GitHub Pages，直接用浏览器打开：
+仓库地址：
 
 ```
-https://liangzaijwj2.github.io/workbuddy-usage-report/
+https://github.com/liangzaijwj2/workbuddy-usage-report
 ```
 
-本地预览也可以，直接双击 `index.html` 即可（纯静态，无需构建、无需联网）。
+推送完成后可在仓库 Settings → Pages 里把 `main` 分支设为站点源，即可用
+`https://liangzaijwj2.github.io/workbuddy-usage-report/` 访问。
+
+本机直接双击 `index.html` 即可预览：纯静态，无需构建、无需联网。
 
 ## 报告里有什么
 
