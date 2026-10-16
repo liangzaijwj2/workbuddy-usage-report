@@ -12,8 +12,11 @@
 https://github.com/liangzaijwj2/workbuddy-usage-report
 ```
 
-推送完成后可在仓库 Settings → Pages 里把 `main` 分支设为站点源，即可用
-`https://liangzaijwj2.github.io/workbuddy-usage-report/` 访问。
+GitHub Pages 站点（由 `main` 分支发布，可直接打开分享）：
+
+```
+https://liangzaijwj2.github.io/workbuddy-usage-report/
+```
 
 本机直接双击 `index.html` 即可预览：纯静态，无需构建、无需联网。
 
