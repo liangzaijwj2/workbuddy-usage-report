@@ -23,6 +23,10 @@ python tools/sync.py --push
 | `python tools/sync.py --push` | 重建 + 提交 + 推送 |
 | `python tools/sync.py --push-only` | 不重建，只把已有改动推上去 |
 
+`--push` 会先试标准 `git push`；如果被网络策略拦住（github.com 不通），
+自动改走 `tools/push_api.py`，用 GitHub REST API 提交，功能等价。
+单独用：`python tools/push_api.py`（会自动比对上次推送的文件快照，只传变化的部分）。
+
 另外配了一个每天 22:00 的定时任务自动跑一遍，无需手动触发。
 
 ### 数据怎么分工
