@@ -671,11 +671,26 @@ def publish():
     msg = "chore(report): 同步 WorkBuddy 新项目 %s" % dt.datetime.now().strftime("%Y-%m-%d %H:%M")
     git(["commit", "-m", msg], check=True)
     log("[publish] 已提交：%s" % msg)
+
     r = git(["push", "origin", "main"], check=False)
     if r.returncode == 0:
         log("[publish] 已推送到 GitHub，Pages 站点稍后自动刷新。")
+        # 让 API 通道的快照跟上来，避免下次重复推送
+        subprocess.run([sys.executable, str(HERE / "push_api.py"), "--sync-state"],
+                       cwd=str(ROOT), capture_output=True)
         return True
-    log("[publish] 推送失败：%s" % ((r.stderr or r.stdout).strip() or "unknown")[:400])
+
+    log("[publish] git push 被网络拦截，改走 GitHub API 通道：")
+    log("          %s" % ((r.stderr or r.stdout).strip() or "unknown")[:200])
+    api = subprocess.run([sys.executable, str(HERE / "push_api.py")],
+                         cwd=str(ROOT), capture_output=True, text=True,
+                         encoding="utf-8", errors="ignore")
+    out = (api.stdout or "").strip()
+    if api.returncode == 0 and "已推送" in out:
+        log(out)
+        return True
+
+    log("[publish] API 通道也失败了：%s" % ((api.stdout or "") + (api.stderr or ""))[:400])
     log("[publish] 改动已保留在本地 commit，可在 GitHub Desktop 点 Push，或稍后重跑 --push-only。")
     return False
 

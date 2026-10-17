@@ -17,6 +17,7 @@
 """
 
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -26,6 +27,8 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# 已推送快照放在 .git 里：既不进仓库，也不受工作区改动影响
+PUSH_STATE = ROOT / ".git" / "push_api_state.json"
 API = "https://api.github.com"
 OWNER = "liangzaijwj2"
 REPO = "workbuddy-usage-report"
@@ -81,24 +84,52 @@ def skip(p):
     return q.startswith(".workbuddy/") or "/.workbuddy/" in q or q.startswith(".git/")
 
 
+def snapshot():
+    """当前工作区所有应入库文件的 sha1 快照（含未跟踪的新文件）。"""
+    files = [p.strip() for p in git(["ls-files"]).split("\n") if p.strip()]
+    files += [p.strip() for p in git(["ls-files", "--others", "--exclude-standard"]).split("\n")
+              if p.strip()]
+    snap = {}
+    for p in files:
+        if skip(p):
+            continue
+        fp = ROOT / p
+        if not fp.exists():
+            continue
+        try:
+            snap[p.replace("\\", "/")] = hashlib.sha1(fp.read_bytes()).hexdigest()
+        except Exception:
+            pass
+    return snap
+
+
+def load_state():
+    try:
+        return json.loads(PUSH_STATE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def save_state(snap):
+    PUSH_STATE.parent.mkdir(exist_ok=True)
+    PUSH_STATE.write_text(json.dumps(snap, ensure_ascii=False, indent=2),
+                          encoding="utf-8", newline="\n")
+
+
 def changed_files(use_all=False):
-    """返回 [(status, relpath)]，status ∈ {A, M, D}"""
+    """比对上次推送快照，返回 [(status, relpath)]，status ∈ {A, M, D}"""
+    cur = snapshot()
     if use_all:
-        out = git(["ls-files"]).split("\n")
-        return [("M", p) for p in out if p.strip() and not skip(p)]
-    out = git(["diff", "--name-status", "origin/%s..%s" % (BRANCH, BRANCH)]).strip()
-    if not out:
-        return []
+        return [("M", p) for p in cur]
+    prev = load_state()
     res = []
-    for line in out.split("\n"):
-        parts = line.split("\t")
-        if len(parts) < 2:
-            continue
-        st = parts[0][0]
-        rel = parts[-1]
-        if skip(rel):
-            continue
-        res.append(("D" if st == "D" else ("A" if st == "A" else "M"), rel))
+    for p, h in cur.items():
+        if prev.get(p) != h:
+            res.append(("A" if p not in prev else "M", p))
+    for p in prev:
+        if p not in cur:
+            res.append(("D", p))
+    res.sort()
     return res
 
 
@@ -106,23 +137,20 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--all-files", action="store_true", help="提交工作区全部受版本控制的文件")
+    ap.add_argument("--sync-state", action="store_true", help="只记录推送快照，不推送")
     ap.add_argument("--message", default=None)
     args = ap.parse_args()
+
+    if args.sync_state:
+        snap = snapshot()
+        save_state(snap)
+        print("[push-api] 已记录推送快照（%d 个文件），后续只会推送变化的部分。" % len(snap))
+        return 0
 
     files = changed_files(args.all_files)
     if not files:
         print("[push-api] 没有需要推送的改动。")
         return 0
-
-    # 未跟踪的新文件也要带上
-    if not args.all_files:
-        untracked = git(["ls-files", "--others", "--exclude-standard"]).split("\n")
-        seen = {p for _, p in files}
-        for p in untracked:
-            p = p.strip()
-            if p and p not in seen and not skip(p):
-                files.append(("A", p))
-                seen.add(p)
 
     print("[push-api] 将提交 %d 个文件：" % len(files))
     for st, p in files:
@@ -169,6 +197,7 @@ def main():
     api("PATCH", "/repos/%s/%s/git/refs/heads/%s" % (OWNER, REPO, BRANCH),
         {"sha": commit["sha"]}, token=token)
 
+    save_state(snapshot())
     print("[push-api] 已推送 %s" % commit["sha"][:8])
     print("[push-api] https://github.com/%s/%s/commit/%s" % (OWNER, REPO, commit["sha"][:8]))
     print("[push-api] GitHub Pages 通常 1-3 分钟内完成重建。")
