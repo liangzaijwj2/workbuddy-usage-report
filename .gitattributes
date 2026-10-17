@@ -1,0 +1,7 @@
+# 统一行尾，避免 Windows 上 checkout 成 CRLF 后
+# 每次同步都被判成「文件有变化」而产生冗余提交
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary

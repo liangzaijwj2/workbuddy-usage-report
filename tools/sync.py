@@ -740,9 +740,9 @@ def main():
         json.dump(ov, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
+    # 不写时间戳：state.json 内容保持稳定，才不会每次同步都产生一个空提交
     with open(STATE, "w", encoding="utf-8", newline="\n") as f:
         json.dump({
-            "updatedAt": dt.datetime.now().isoformat(timespec="seconds"),
             "projects": new_sids,
             "sessions": sorted(known_sids | {s for s in sessions}),
         }, f, ensure_ascii=False, indent=2)

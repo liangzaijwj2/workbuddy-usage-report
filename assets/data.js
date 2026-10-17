@@ -2,7 +2,7 @@
  * WorkBuddy 使用情况总结 - 数据源
  * 本文件由 tools/sync.py 自动生成，请勿手改。
  * 需要人工维护的内容请写到 data/overrides.json 后重跑同步。
- * 生成时间：2026-10-17 14:21
+ * 生成时间：2026-10-17 21:30
  */
 window.REPORT_DATA = {
   meta: {
