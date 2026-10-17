@@ -32,8 +32,8 @@
         <div class="hero-badge">数据取自本地工作区 · 记忆日志 · 变更索引 · 发布记录</div>
         <h1 class="hero-title">我的 <span class="grad">WorkBuddy</span> 使用情况总结</h1>
         <p class="hero-sub">
-          三天、两个完整项目、三千余行代码。这份报告把这段时间里交给 WorkBuddy 的每一次任务、
-          每一行产出和背后的使用偏好，全部摊开来看。
+          <span id="heroSubLead"></span>
+          这份报告把这段时间里交给 WorkBuddy 的每一次任务、每一行产出和背后的使用偏好，全部摊开来看。
         </p>
         <div class="hero-meta" id="heroMeta"></div>
         <div class="hero-actions">
@@ -60,7 +60,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2>时间线</h2>
-          <p>从首次启动到现在，每一步都留下了痕迹</p>
+          <p id="timelineSub"></p>
         </div>
         <ol class="timeline" id="timelineList"></ol>
       </div>
@@ -71,7 +71,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2>项目详情</h2>
-          <p>两个完整交付的项目，以及它们各自的体量</p>
+          <p id="projectsSub"></p>
         </div>
         <div id="projectList"></div>
       </div>
@@ -99,8 +99,8 @@
             <h3 class="card-title">按语言拆分</h3>
             <div id="bars"></div>
             <p class="bars-note">
-              两个项目都不约而同地选择了<strong>零第三方依赖</strong>：Node 端全用原生 http / fs / path 手写，
-              Python 端只导入标准库。
+              写代码的项目普遍选择<strong>零第三方依赖</strong>：Node 端全用原生 http / fs / path 手写，
+              Python 端只导入标准库。产出结构会跟着任务类型走——做内容与演讲时，Slide DSL 和 Markdown 的占比会明显抬升。
             </p>
           </div>
         </div>

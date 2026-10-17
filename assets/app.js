@@ -24,8 +24,39 @@
     heart: '<path d="M12 20s-7-4.4-7-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7 2.6c0 5-7 9.4-7 9.4z"/>',
     rocket: '<path d="M5 15l-2 5 5-2"/><path d="M9 19s-2-1-3-4c2-3 5-7 9-9 3-1.5 6-1 6-1s.5 3-1 6c-2 4-6 7-9 9c-3 1-4-1-4-1z"/><circle cx="14.5" cy="9.5" r="1.5"/>',
     zap: '<path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/>',
+    shield: '<path d="M12 3l8 3v6c0 5-3.5 8.2-8 9-4.5-.8-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/>',
+    palette: '<path d="M12 21a9 9 0 1 1 9-9c0 2.5-2 3.5-3.8 3.5H15a2 2 0 0 0-1.4 3.4A1.9 1.9 0 0 1 12 21z"/><circle cx="8" cy="10" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="7.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="16" cy="9.5" r="1.1" fill="currentColor" stroke="none"/>',
+    layers: '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/>',
     link: '<path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/>'
   };
+
+  /* ---------- 动态文案（避免写死数字，同步后自动跟随数据） ---------- */
+  (function () {
+    var get = function (label) {
+      for (var i = 0; i < D.overview.length; i++) {
+        if (D.overview[i].label === label) { return D.overview[i]; }
+      }
+      return null;
+    };
+    var n = D.projects.length;
+    var lines = D.techStack.reduce(function (a, b) { return a + b.lines; }, 0);
+    var online = D.projects.filter(function (p) { return !!p.online; }).length;
+    var days = get('使用天数');
+    var projSub = $('#projectsSub');
+    if (projSub) { projSub.textContent = n + ' 个完整交付的项目，以及它们各自的体量'; }
+    var tlSub = $('#timelineSub');
+    if (tlSub) {
+      tlSub.textContent = '从首次启动到现在，' + D.timeline.length + ' 个关键节点';
+    }
+    var lead = $('#heroSubLead');
+    if (lead) {
+      var txt = (days ? days.value + ' 天、' : '') + n + ' 个完整项目、' +
+        lines.toLocaleString() + ' 行代码';
+      if (online > 0) { txt += '，其中 ' + online + ' 个已上线'; }
+      txt += '。';
+      lead.textContent = txt;
+    }
+  })();
 
   /* ---------- Hero meta ---------- */
   (function () {
@@ -78,7 +109,8 @@
     var box = $('#projectList');
     if (!box) { return; }
     D.projects.forEach(function (p) {
-      var totalLines = p.files.reduce(function (a, f) { return a + f.lines; }, 0);
+      // 只有标注 lines 的计入行数；标注 size 的（PPT、图片等二进制产物）不计
+      var totalLines = p.files.reduce(function (a, f) { return a + (f.size ? 0 : (f.lines || 0)); }, 0);
       var card = el('article', 'project reveal');
       card.setAttribute('data-color', p.color);
 
@@ -91,7 +123,9 @@
       html += '  <div class="pj-meta">';
       html += '    <span><i></i>' + esc(p.time) + '</span>';
       html += '    <span><i></i>耗时 ' + esc(p.duration) + '</span>';
-      html += '    <span><i></i>共 ' + totalLines.toLocaleString() + ' 行</span>';
+      html += '    <span><i></i>' + (totalLines > 0
+        ? '共 ' + totalLines.toLocaleString() + ' 行'
+        : '纯视觉产物') + '</span>';
       html += '    <span><i></i>' + p.files.length + ' 个文件</span>';
       html += '  </div>';
       html += '  <p class="pj-summary">' + esc(p.summary) + '</p>';
@@ -119,7 +153,9 @@
       html += '    <div class="file-list">' + p.files.map(function (f) {
         return '<div class="file-row"><div><div class="fname">' + esc(f.name) + '</div>' +
           '<div class="fdesc">' + esc(f.desc) + '</div></div>' +
-          '<div class="flines">' + f.lines.toLocaleString() + ' 行</div></div>';
+          '<div class="flines">' + (f.size
+            ? esc(f.size)
+            : (f.lines || 0).toLocaleString() + ' 行') + '</div></div>';
       }).join('') + '</div>';
       html += '  </div>';
       html += '</div>';
