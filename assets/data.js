@@ -2,7 +2,7 @@
  * WorkBuddy 使用情况总结 - 数据源
  * 本文件由 tools/sync.py 自动生成，请勿手改。
  * 需要人工维护的内容请写到 data/overrides.json 后重跑同步。
- * 生成时间：2026-10-18 08:37
+ * 生成时间：2026-10-18 08:38
  */
 window.REPORT_DATA = {
   meta: {
@@ -91,12 +91,6 @@ window.REPORT_DATA = {
       title: "本总结网站接入自动同步",
       desc: "新增 tools/sync.py，此后每完成一个 WorkBuddy 项目都会自动补进本报告。",
       tag: "现在"
-    },
-    {
-      date: "10-17 14:18",
-      title: "731033cd 开工",
-      desc: "由 WorkBuddy 完成于 2026-10-17 14:18。",
-      tag: "新项目"
     },
     {
       date: "10-18 08:23",
