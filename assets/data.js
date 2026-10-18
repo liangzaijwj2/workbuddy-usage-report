@@ -2,22 +2,22 @@
  * WorkBuddy 使用情况总结 - 数据源
  * 本文件由 tools/sync.py 自动生成，请勿手改。
  * 需要人工维护的内容请写到 data/overrides.json 后重跑同步。
- * 生成时间：2026-10-17 21:30
+ * 生成时间：2026-10-18 08:36
  */
 window.REPORT_DATA = {
   meta: {
     owner: "liangzaijwj2",
-    generatedAt: "2026-10-17",
-    period: "2026-10-14 ~ 2026-10-17",
+    generatedAt: "2026-10-18",
+    period: "2026-10-14 ~ 2026-10-18",
     source: "WorkBuddy 本地工作区 / 记忆日志 / 变更索引 / 产物索引 / 部署记录"
   },
   overview: [
-    { label: "完成任务会话", value: 4, unit: "个", desc: "均产生实际交付物" },
-    { label: "累计产出代码", value: 4718, unit: "行", desc: "全部项目合计" },
-    { label: "交付文件", value: 21, unit: "份", desc: "代码 + 文档 + 设计稿" },
+    { label: "完成任务会话", value: 6, unit: "个", desc: "均产生实际交付物" },
+    { label: "累计产出代码", value: 4940, unit: "行", desc: "全部项目合计" },
+    { label: "交付文件", value: 24, unit: "份", desc: "代码 + 文档 + 设计稿" },
     { label: "上线应用", value: 1, unit: "个", desc: "已部署可公网访问" },
-    { label: "累计投入时长", value: 139, unit: "分钟", desc: "各项目首尾时间合计" },
-    { label: "使用天数", value: 4, unit: "天", desc: "含未产出的工作区" },
+    { label: "累计投入时长", value: 1237, unit: "分钟", desc: "各项目首尾时间合计" },
+    { label: "使用天数", value: 5, unit: "天", desc: "含未产出的工作区" },
   ],
   timeline: [
     {
@@ -91,6 +91,18 @@ window.REPORT_DATA = {
       title: "本总结网站接入自动同步",
       desc: "新增 tools/sync.py，此后每完成一个 WorkBuddy 项目都会自动补进本报告。",
       tag: "现在"
+    },
+    {
+      date: "10-17 14:18",
+      title: "731033cd 开工",
+      desc: "由 WorkBuddy 完成于 2026-10-17 14:18。",
+      tag: "新项目"
+    },
+    {
+      date: "10-18 08:23",
+      title: "AI Coding 商业模式演变研究",
+      desc: "两分钟交付一份 222 行行业研究报告：计价单位四级跳时间线，全文按【事实】/【推测】/【待核实】三档标注可信度。",
+      tag: "项目五"
     },
   ],
   projects: [
@@ -221,14 +233,55 @@ window.REPORT_DATA = {
       ],
       online: null
     },
+    {
+      name: "731033cd",
+      subtitle: "731033cd",
+      time: "2026-10-17 14:18 ~ 2026-10-18 08:35",
+      duration: "约 18 小时 16 分钟",
+      status: "已交付",
+      color: "muted",
+      stack: ["JSON"],
+      summary: "由 WorkBuddy 完成于 2026-10-17 14:18。",
+      highlights: [
+      ],
+      files: [
+        { name: "data/overrides.json", lines: 547, desc: "源文件" },
+        { name: "data/overrides.json", size: "20 KB", desc: "交付产物" },
+      ],
+      online: null
+    },
+    {
+      name: "分析 AI 编程行业商业模式演变",
+      subtitle: "AI_Coding商业模式演变_2023-2026.md",
+      time: "2026-10-18 08:23 ~ 08:25",
+      duration: "约 2 分钟",
+      status: "已交付",
+      color: "green",
+      stack: ["Markdown", "联网检索 / 信息核验"],
+      summary: "一份按时间线组织的 AI 编程行业商业模式研究报告（2023–2026.10）：计价单位从人头、请求次数、美元信用池到真实 token 的四级跳，全文以【事实】/【推测】/【待核实】三档标注区分信息可信度。",
+      highlights: [
+        "四阶段主线：订阅锚定 → 分层与价格战 → Agent 化成本失控 → 全面按量计费",
+        "全文统一【事实】/【推测】/【待核实】三档标注，查不到的宁可标待核实也不硬写",
+        "核心结论：Agent 化后单次交互成本方差从 1 倍扩大到约 100 倍，固定订阅在数学上不成立",
+        "识别并规避 SEO/AI 聚合站的矛盾数字，只用官方源交叉验证（github.blog、openai.com、blog.replit.com、The Register、Reuters/CNBC）",
+        "锁定 2026.06 关键月：Copilot 全面改 AI Credits、OpenAI 推零席位费 Codex、SpaceX 以 $600 亿收购 Cursor",
+        "六种收费方式横向对照表：固定席位 / 请求上限 / 信用池 / token 按量 / Agent 工时 / 成果计费",
+        "单独一章拆解中国市场路径：Trae、通义灵码、文心快码、CodeBuddy 的免费+订阅混合模式",
+        "收尾给出 5 条明确标注为推测的趋势判断 + 4 个待持续跟踪的未决问题",
+      ],
+      files: [
+        { name: "AI_Coding商业模式演变_2023-2026.md", lines: 222, desc: "研究报告正文：四阶段时间线 + 收费对照 + 驱动因素 + 中国市场 + 来源清单" },
+      ],
+      online: null
+    },
   ],
   techStack: [
-    { name: "Python", lines: 1909, share: 40.5, note: "RPG 游戏 + 图像处理脚本", color: "#6366f1" },
-    { name: "Slide DSL", lines: 844, share: 17.9, note: "西药演讲 15 页源文件", color: "#14b8a6" },
-    { name: "Markdown", lines: 795, share: 16.8, note: "讲稿 / 大纲 / 设计宪法 / 说明", color: "#f59e0b" },
-    { name: "JavaScript", lines: 697, share: 14.8, note: "榜单站服务端 + 前端逻辑", color: "#0ea5e9" },
-    { name: "CSS", lines: 336, share: 7.1, note: "榜单站样式", color: "#22c55e" },
-    { name: "HTML", lines: 137, share: 2.9, note: "榜单站页面结构", color: "#ec4899" },
+    { name: "Python", lines: 1909, share: 38.6, note: "RPG 游戏 + 图像处理脚本", color: "#6366f1" },
+    { name: "Slide DSL", lines: 844, share: 17.1, note: "西药演讲 15 页源文件", color: "#14b8a6" },
+    { name: "Markdown", lines: 1017, share: 20.6, note: "讲稿 / 大纲 / 设计宪法 / 行业研究报告", color: "#f59e0b" },
+    { name: "JavaScript", lines: 697, share: 14.1, note: "榜单站服务端 + 前端逻辑", color: "#0ea5e9" },
+    { name: "CSS", lines: 336, share: 6.8, note: "榜单站样式", color: "#22c55e" },
+    { name: "HTML", lines: 137, share: 2.8, note: "榜单站页面结构", color: "#ec4899" },
   ],
   insights: [
     {
@@ -244,12 +297,12 @@ window.REPORT_DATA = {
     {
       icon: "shield",
       title: "数字必须可核查，出处要写清",
-      desc: "科普内容里每个数据都要求标明来源与年份，并主动提示「2013 年的调查偏早」这类时效风险。要的是能拿出去讲的东西，不是听起来有道理的东西。"
+      desc: "科普内容里每个数据都要求标明来源与年份；行业研究报告更进一步，全文统一用【事实】/【推测】/【待核实】三档标注，主动提示聚合站数字互相矛盾、查不到的宁可标待核实。要的是能拿出去讲的东西，不是听起来有道理的东西。"
     },
     {
       icon: "palette",
-      title: "使用场景从「写代码」扩到「做内容、做设计」",
-      desc: "前两天交付的都是程序（网站、游戏），10-17 开始产出 15 页科普 PPT、三千字讲稿和 AI 海报。WorkBuddy 已经不只是写代码的工具，而是内容生产工具。"
+      title: "使用场景从「写代码」扩到「做内容、做设计、做研究」",
+      desc: "前两天交付的都是程序（网站、游戏），10-17 开始产出 15 页科普 PPT、三千字讲稿和 AI 海报，10-18 又用它做带信息源核验的行业研究。WorkBuddy 已经不只是写代码的工具，而是内容生产与研究分析工具。"
     },
     {
       icon: "layers",
@@ -280,5 +333,6 @@ window.REPORT_DATA = {
     { name: "2026-10-17-12-08-36", created: "2026-10-17 12:08", status: "已交付", note: "西药的安全性 · 演讲套装", tone: "teal" },
     { name: "2026-10-17-12-19-53", created: "2026-10-17 12:19", status: "已交付", note: "马年迷幻交通灯海报", tone: "amber" },
     { name: "2026-10-17-14-04-06", created: "2026-10-17 14:04", status: "进行中", note: "本报告接入自动同步", tone: "green" },
+    { name: "2026-10-18-08-18-25", created: "2026-10-18 08:18", status: "已交付", note: "AI Coding 商业模式演变研究报告", tone: "green" },
   ]
 };
