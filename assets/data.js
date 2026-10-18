@@ -2,7 +2,7 @@
  * WorkBuddy 使用情况总结 - 数据源
  * 本文件由 tools/sync.py 自动生成，请勿手改。
  * 需要人工维护的内容请写到 data/overrides.json 后重跑同步。
- * 生成时间：2026-10-18 08:36
+ * 生成时间：2026-10-18 08:37
  */
 window.REPORT_DATA = {
   meta: {
@@ -12,11 +12,11 @@ window.REPORT_DATA = {
     source: "WorkBuddy 本地工作区 / 记忆日志 / 变更索引 / 产物索引 / 部署记录"
   },
   overview: [
-    { label: "完成任务会话", value: 6, unit: "个", desc: "均产生实际交付物" },
+    { label: "完成任务会话", value: 5, unit: "个", desc: "均产生实际交付物" },
     { label: "累计产出代码", value: 4940, unit: "行", desc: "全部项目合计" },
-    { label: "交付文件", value: 24, unit: "份", desc: "代码 + 文档 + 设计稿" },
+    { label: "交付文件", value: 22, unit: "份", desc: "代码 + 文档 + 设计稿" },
     { label: "上线应用", value: 1, unit: "个", desc: "已部署可公网访问" },
-    { label: "累计投入时长", value: 1237, unit: "分钟", desc: "各项目首尾时间合计" },
+    { label: "累计投入时长", value: 141, unit: "分钟", desc: "各项目首尾时间合计" },
     { label: "使用天数", value: 5, unit: "天", desc: "含未产出的工作区" },
   ],
   timeline: [
@@ -230,23 +230,6 @@ window.REPORT_DATA = {
         { name: "horse-year-traffic-poster_assets/*.png", size: "2.7 MB", desc: "1024×1792 竖版成品海报" },
         { name: "horse-year-traffic-poster.miora", size: "398 B", desc: "可继续编辑的海报画布" },
         { name: "ref-poster.jpg", size: "186 KB", desc: "用户提供的风格参考图" },
-      ],
-      online: null
-    },
-    {
-      name: "731033cd",
-      subtitle: "731033cd",
-      time: "2026-10-17 14:18 ~ 2026-10-18 08:35",
-      duration: "约 18 小时 16 分钟",
-      status: "已交付",
-      color: "muted",
-      stack: ["JSON"],
-      summary: "由 WorkBuddy 完成于 2026-10-17 14:18。",
-      highlights: [
-      ],
-      files: [
-        { name: "data/overrides.json", lines: 547, desc: "源文件" },
-        { name: "data/overrides.json", size: "20 KB", desc: "交付产物" },
       ],
       online: null
     },
